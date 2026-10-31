@@ -1,0 +1,57 @@
+---
+layout: runbook
+title: '#4471 · three problems, not one'
+owner: support desk
+status: open
+reviewed: 2026-10-31
+signature: simonmeza01
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+[#4471](/kb/incidents/4471) says its reports are one bug with one fix queued. Read with the
+tenant directory and the desk's own notes, they are three problems. One fix for the parser leaves
+the other two open.
+
+<Callout kind="warn">
+#4471 is not one issue. Each problem below has its own ticket; count and fix them apart.
+</Callout>
+
+## The problems
+
+<ProblemTable ticket={4471} />
+
+- **`parser`**: the shared parser reads every date month first. A day-first tenant's dates
+  come out with day and month swapped: 7 April is sent as 4 July. Every tenant, every channel.
+- **`hint`**: booking-v3's form prints `MM/DD/YYYY` under its date field. People type what the
+  hint says, and the form reads it the tenant's way, day first. Only tenants on booking-v3, only
+  reports that came in through the form. Fixing the parser does not fix this one: the hint is wrong.
+- **`shift`**: the date moves by one day, not by a month swap. "Tuesday 12 May" shows as
+  "Monday 11 May"; one meeting went out as Tuesday in Lisbon and Monday in Toronto. That is a
+  time zone bug. The desk noted these reports as a one-day move but filed them under `parser`.
+
+## Why #4471 shows one
+
+<CauseTable ticket={4471} />
+
+- The desk merges by subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)).
+  The same handful of subject lines turns up under all three problems, so subject alone cannot
+  tell them apart. The rule's own consequences say different subjects split one bug; here, the
+  same subjects joined three bugs.
+- The table above files the one-day moves under `parser` and marks `hint` as "no ticket of its
+  own". That is what the ticket shows, not what the reports say.
+- Intake's tag is a guess from the reporter's browser. Count by tenant and channel, not by tag.
+- The export repeats some rows. Count reports by id.
+
+## For the desk
+
+- Keep #4471 for `parser`. Move the other two to their own tickets.
+- A report about a booking-v3 form is a `hint` report until its tenant says otherwise.
+- A date that moved by one day is a `shift` report, whatever its subject.
+
+<RenderStamp {signature} />
