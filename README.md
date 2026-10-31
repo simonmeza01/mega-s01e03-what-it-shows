@@ -34,3 +34,14 @@ Support desk. Decision records: whoever signed them.
 ---
 
 Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
+
+## #4471, split
+
+#4471 holds three problems, each filed as its own issue in this repo:
+[#1 parser](https://github.com/simonmeza01/mega-s01e03-what-it-shows/issues/1),
+[#2 hint](https://github.com/simonmeza01/mega-s01e03-what-it-shows/issues/2),
+[#3 shift](https://github.com/simonmeza01/mega-s01e03-what-it-shows/issues/3).
+
+- The page: [`src/routes/kb/incidents/4471-split/+page.svx`](src/routes/kb/incidents/4471-split/+page.svx)
+- As the desk sees it: [`build/kb/incidents/4471-split.html`](build/kb/incidents/4471-split.html) (`npm install && npm run build` renders it again)
+- Its logic: `src/lib/kb/problems.ts`, `src/lib/kb/ProblemTable.svelte`; issue links in `src/lib/data/tickets-4471.json`
