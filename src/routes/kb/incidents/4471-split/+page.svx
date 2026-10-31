@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 · three problems, not one'
 owner: support desk
-status: open
+status: known
 reviewed: 2026-10-31
 signature: simonmeza01
 ---
