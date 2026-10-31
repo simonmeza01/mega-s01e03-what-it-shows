@@ -4,13 +4,13 @@
   import tickets from '#lib/data/tickets-4471.json';
   import { uniqueById, type Report } from '#lib/kb/causes';
   import { tenantOf } from '#lib/kb/locales';
-  import { groupByProblem } from '#lib/kb/problems';
+  import { problemRows } from '#lib/kb/problems';
 
   let { ticket }: { ticket: number } = $props();
 
   const rows = $derived((reports as Report[]).filter((r) => r.mergedInto === ticket));
   const unique = $derived(uniqueById(rows));
-  const groups = $derived(groupByProblem(unique, tenantOf, notes.oneDayMove));
+  const groups = $derived(problemRows(unique, tenantOf, notes.oneDayMove));
   const filed = tickets as Record<string, string>;
   const channels = (c: Record<string, number>) =>
     Object.entries(c)
@@ -32,7 +32,7 @@
     {#each groups as g (g.problem)}
       <tr>
         <td><code>{g.problem}</code></td>
-        <td>{g.reports.length}</td>
+        <td>{g.reports.length}{#if g.filedUnder}<span class="muted"> · also in <code>{g.filedUnder}</code></span>{/if}</td>
         <td class="muted">{channels(g.channels)}</td>
         <td title={g.tenants.join(', ')}>{g.tenants.length}</td>
         <td>{g.firstSeen} → {g.lastSeen}</td>
@@ -43,8 +43,8 @@
 </table>
 
 {#each groups as g (g.problem)}
-  {#if g.problem !== 'parser' && g.reports.length < 12}
-    <p class="muted"><code>{g.problem}</code>: {g.reports.map((r) => r.id).join(', ')}</p>
+  {#if g.filedUnder}
+    <p class="muted"><code>{g.problem}</code>: {g.reports.map((r) => r.id).join(', ')}. The desk files these under <code>{g.filedUnder}</code> by tenant, so they count there too; they need their own fix.</p>
   {/if}
 {/each}
 
