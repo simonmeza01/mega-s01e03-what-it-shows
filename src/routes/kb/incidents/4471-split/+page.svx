@@ -51,7 +51,7 @@ the other two open.
 
 ## For the desk
 
-- Keep #4471 for `parser`. Move the other two to their own tickets.
+- Keep #4471 for `parser`. Move the other two to their own tickets: the table links each one.
 - A report about a booking-v3 form is a `hint` report until its tenant says otherwise.
 - A date that moved by one day is a `shift` report, whatever its subject.
 
