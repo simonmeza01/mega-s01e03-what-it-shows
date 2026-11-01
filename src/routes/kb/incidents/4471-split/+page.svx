@@ -4,7 +4,7 @@ title: '#4471 · three problems, not one'
 owner: support desk
 status: known
 reviewed: 2026-10-31
-signature: simonmeza01
+signature: 'v1.eyJzdWIiOiIyNTEyIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTM0OTI0NjYsImV4cCI6MTc5MzU3ODg2Nn0.1-UAFA8nKO33XqXptaIOUK1ua3P0GMxAveoYYikWaW4'
 ---
 
 <script>
@@ -17,6 +17,10 @@ signature: simonmeza01
 [#4471](/kb/incidents/4471) says its reports are one bug with one fix queued. Read with the
 tenant directory and the desk's own notes, they are three problems. One fix for the parser leaves
 the other two open.
+
+**Where they stand (engineering update, 5 October):** `parser` is fixed ("fix(dates): parse
+dd/mm for eu locales") and #4471 is closed. `hint` is won't fix: the booking-v3 form is retired.
+`shift` is still open: neither change touches it.
 
 <Callout kind="warn">
 #4471 is not one issue. Each problem below has its own ticket; count and fix them apart.
@@ -51,7 +55,7 @@ the other two open.
 
 ## For the desk
 
-- Keep #4471 for `parser`. Move the other two to their own tickets: the table links each one.
+- `parser` is fixed and `hint` goes away with booking-v3. Keep watching for `shift` reports: the table links its ticket.
 - A report about a booking-v3 form is a `hint` report until its tenant says otherwise.
 - A date that moved by one day is a `shift` report, whatever its subject.
 
